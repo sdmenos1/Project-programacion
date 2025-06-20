@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import EventCard from '../../components/EventCard.astro';
+import EventFilter from '../../components/EventFilter.astro';
+import eventsData from '../../data/events.json';
+
+const events = eventsData;
+---
+
+<Layout title="Eventos - Kali Club">
+    <Header />
+    
+    <main class="events-page">
+        <section class="events-hero">
+            <div class="container">
+                <h1 class="page-title">Próximos Eventos</h1>
+                <p class="page-subtitle">Vive las mejores noches con los mejores artistas</p>
+            </div>
+        </section>
+
+        <section class="events-content">
+            <div class="container">
+                <EventFilter />
+                
+                <div class="events-grid" id="events-grid">
+                    {events.map((event) => (
+                        <EventCard 
+                            id={event.id}
+                            title={event.title}
+                            date={event.date}
+                            time={event.time}
+                            artist={event.artist}
+                            genre={event.genre}
+                            price={event.price}
+                            image={event.image}
+                            description={event.description}
+                            venue={event.venue}
+                            capacity={event.capacity}
+                            ticketsLeft={event.ticketsLeft}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .events-page {
+        padding-top: 80px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+
+    .events-hero {
+        padding: 4rem 0;
+        text-align: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                    url('/pictures/events/events-hero.jpg') center/cover;
+    }
+
+    .page-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .page-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .events-content {
+        padding: 4rem 0;
+    }
+
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .events-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+</style>

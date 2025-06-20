@@ -1,0 +1,105 @@
+[
+  {
+    "id": 1,
+    "username": "juan_perez",
+    "name": "Juan Pérez",
+    "email": "juan@example.com",
+    "avatar": "/pictures/users/juan-avatar.jpg",
+    "age": 28,
+    "gender": "Masculino",
+    "fechaNacimiento": "1995-05-15",
+    "memberSince": "Enero 2023",
+    "vipStatus": true,
+    "eventsAttended": 15,
+    "favoriteGenres": ["Electronic", "Reggaeton", "Hip Hop"],
+    "upcomingEvents": [
+      {
+        "id": 2,
+        "title": "Electronic Vibes",
+        "date": "2024-02-20",
+        "artist": "DJ Tiësto",
+        "image": "/pictures/events/electronic-vibes.jpg"
+      }
+    ],
+    "pastEvents": [
+      {
+        "id": 1,
+        "title": "Noche de Reggaeton",
+        "date": "2024-01-15",
+        "artist": "DJ Maluma",
+        "image": "/pictures/events/reggaeton-night.jpg"
+      }
+    ],
+    "preferences": {
+      "notifications": true,
+      "newsletter": true,
+      "publicProfile": true
+    }
+  },
+  {
+    "id": 2,
+    "username": "maria_garcia",
+    "name": "María García",
+    "email": "maria@example.com",
+    "avatar": "/pictures/users/maria-avatar.jpg",
+    "age": 25,
+    "gender": "Femenino",
+    "fechaNacimiento": "1998-08-22",
+    "memberSince": "Marzo 2023",
+    "vipStatus": false,
+    "eventsAttended": 8,
+    "favoriteGenres": ["Pop", "Salsa", "Rock"],
+    "upcomingEvents": [],
+    "pastEvents": [
+      {
+        "id": 3,
+        "title": "Salsa y Bachata",
+        "date": "2024-01-25",
+        "artist": "Orquesta Latina",
+        "image": "/pictures/events/salsa-bachata.jpg"
+      }
+    ],
+    "preferences": {
+      "notifications": false,
+      "newsletter": true,
+      "publicProfile": false
+    }
+  },
+  {
+    "id": 3,
+    "username": "carlos_rodriguez",
+    "name": "Carlos Rodríguez",
+    "email": "carlos@example.com",
+    "avatar": "/pictures/users/carlos-avatar.jpg",
+    "age": 32,
+    "gender": "Masculino",
+    "fechaNacimiento": "1991-12-03",
+    "memberSince": "Octubre 2022",
+    "vipStatus": true,
+    "eventsAttended": 25,
+    "favoriteGenres": ["Rock", "Electronic", "Hip Hop"],
+    "upcomingEvents": [
+      {
+        "id": 5,
+        "title": "Hip Hop Underground",
+        "date": "2024-03-05",
+        "artist": "MC Flow",
+        "image": "/pictures/events/hip-hop.jpg"
+      }
+    ],
+    "pastEvents": [
+      {
+        "id": 4,
+        "title": "Rock en Español",
+        "date": "2024-02-01",
+        "artist": "Banda Los Rebeldes",
+        "image": "/pictures/events/rock-espanol.jpg"
+      }
+    ],
+    "preferences": {
+      "notifications": true,
+      "newsletter": false,
+      "publicProfile": true
+    }
+  }
+]

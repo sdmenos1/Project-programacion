@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import UserProfile from '../../components/UserProfile.astro';
+import usersData from '../../data/users.json';
+
+export async function getStaticPaths() {
+    return usersData.map((user) => ({
+        params: { user: user.username },
+        props: { user }
+    }));
+}
+
+const { user } = Astro.props;
+---
+
+<Layout title={`${user.name} - Perfil de Usuario`}>
+    <Header />
+    
+    <main class="profile-page">
+        <UserProfile user={user} />
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .profile-page {
+        padding-top: 80px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+</style>

@@ -1,0 +1,709 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Nosotros - Kali Club">
+    <Header />
+    
+    <main class="about-page">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="about-hero-content">
+                <h1 class="about-title">Conoce Nuestra Historia</h1>
+                <p class="about-subtitle">Más de una década creando experiencias nocturnas inolvidables</p>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story-section">
+            <div class="container">
+                <div class="story-grid">
+                    <div class="story-text">
+                        <h2 class="section-title">Nuestra Historia</h2>
+                        <p class="story-paragraph">
+                            Desde 2010, Kali Club ha sido el epicentro de la vida nocturna en la ciudad. 
+                            Nacimos con la visión de crear un espacio donde la música, el arte y la cultura 
+                            se fusionen para ofrecer experiencias únicas e inolvidables.
+                        </p>
+                        <p class="story-paragraph">
+                            A lo largo de los años, hemos evolucionado constantemente, adaptándonos a las 
+                            nuevas tendencias musicales y tecnológicas, pero siempre manteniendo nuestra 
+                            esencia: ser el lugar donde las noches cobran vida.
+                        </p>
+                        <p class="story-paragraph">
+                            Nuestro compromiso con la excelencia nos ha convertido en el destino preferido 
+                            de artistas internacionales, celebridades y amantes de la buena música. Cada noche 
+                            en Kali Club es una nueva oportunidad de crear recuerdos que durarán para siempre.
+                        </p>
+                    </div>
+                    <div class="story-image">
+                        <img src="/pictures/about/club-history.jpg" alt="Historia del club" class="story-img">
+                        <div class="story-stats">
+                            <div class="stat-bubble">
+                                <span class="stat-number">13+</span>
+                                <span class="stat-label">Años</span>
+                            </div>
+                            <div class="stat-bubble">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Eventos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title centered">Nuestros Valores</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🎵</div>
+                        <h3 class="value-title">Música de Calidad</h3>
+                        <p class="value-description">
+                            Seleccionamos cuidadosamente a los mejores DJs y artistas para 
+                            garantizar una experiencia sonora excepcional cada noche.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">✨</div>
+                        <h3 class="value-title">Ambiente Único</h3>
+                        <p class="value-description">
+                            Creamos espacios inmersivos con tecnología de vanguardia y 
+                            diseño innovador para cada evento y celebración.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3 class="value-title">Servicio Excepcional</h3>
+                        <p class="value-description">
+                            Nuestro equipo está comprometido con brindar un servicio 
+                            personalizado y de la más alta calidad a cada cliente.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🔒</div>
+                        <h3 class="value-title">Seguridad Total</h3>
+                        <p class="value-description">
+                            Implementamos los más altos estándares de seguridad para 
+                            garantizar que disfrutes sin preocupaciones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <h2 class="section-title centered">Nuestro Equipo</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="/pictures/team/ceo.jpg" alt="CEO" class="member-img">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#" class="social-link">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-link">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Carlos Mendoza</h3>
+                            <p class="member-role">CEO & Fundador</p>
+                            <p class="member-description">
+                                Visionario de la industria del entretenimiento nocturno con más de 15 años de experiencia 
+                                creando espacios únicos y experiencias memorables.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="/pictures/team/music-director.jpg" alt="Director Musical" class="member-img">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#" class="social-link">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-link">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Ana Rodríguez</h3>
+                            <p class="member-role">Directora Musical</p>
+                            <p class="member-description">
+                                Experta en tendencias musicales globales y responsable de curar las mejores 
+                                experiencias sonoras para cada evento y celebración.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="/pictures/team/events-manager.jpg" alt="Manager de Eventos" class="member-img">
+                            <div class="member-overlay">
+                                <div class="social-links">
+                                    <a href="#" class="social-link">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="social-link">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Miguel Torres</h3>
+                            <p class="member-role">Manager de Eventos</p>
+                            <p class="member-description">
+                                Especialista en producción de eventos con un ojo excepcional para los detalles 
+                                y más de 10 años coordinando celebraciones memorables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">13+</div>
+                        <div class="stat-label">Años de Experiencia</div>
+                        <div class="stat-description">Liderando la vida nocturna</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Eventos Realizados</div>
+                        <div class="stat-description">Noches inolvidables</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Clientes Satisfechos</div>
+                        <div class="stat-description">Experiencias únicas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Artistas Presentados</div>
+                        <div class="stat-description">Talentos internacionales</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="contact-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">¿Listo para Vivir la Experiencia?</h2>
+                    <p class="cta-description">
+                        Únete a nosotros y descubre por qué somos el destino nocturno preferido de la ciudad.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="/eventos" class="btn btn-primary">Ver Próximos Eventos</a>
+                        <a href="/contacto" class="btn btn-secondary">Contáctanos</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .about-page {
+        padding-top: 80px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .about-hero {
+        height: 60vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                    url('/pictures/about/about-hero.jpg') center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(255, 0, 128, 0.1) 0%, transparent 70%);
+    }
+
+    .about-hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .about-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .about-subtitle {
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    /* Story Section */
+    .story-section {
+        padding: 6rem 0;
+        background: #0a0a0a;
+        color: white;
+    }
+
+    .story-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 2rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .section-title.centered {
+        text-align: center;
+    }
+
+    .story-paragraph {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .story-image {
+        position: relative;
+    }
+
+    .story-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .story-stats {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .stat-bubble {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .stat-bubble:nth-child(2) {
+        animation-delay: 1.5s;
+    }
+
+    .stat-bubble .stat-number {
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: #ff0080;
+        line-height: 1;
+    }
+
+    .stat-bubble .stat-label {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Values Section */
+    .values-section {
+        padding: 6rem 0;
+        background: #111;
+        color: white;
+    }
+
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .value-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .value-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .value-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 0, 128, 0.3);
+    }
+
+    .value-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .value-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .value-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #ff0080;
+    }
+
+    .value-description {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+    }
+
+    /* Team Section */
+    .team-section {
+        padding: 6rem 0;
+        background: #0a0a0a;
+        color: white;
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        margin-top: 3rem;
+    }
+
+    .team-member {
+        text-align: center;
+    }
+
+    .member-image {
+        position: relative;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+    }
+
+    .member-img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #ff0080;
+        transition: all 0.3s ease;
+    }
+
+    .member-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .member-image:hover .member-overlay {
+        opacity: 1;
+    }
+
+    .member-image:hover .member-img {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: #ff0080;
+        transform: translateY(-2px);
+    }
+
+    .social-link svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .member-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #ff0080;
+    }
+
+    .member-role {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #7928ca;
+    }
+
+    .member-description {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        padding: 4rem 0;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        color: white;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-number {
+        display: block;
+        font-size: 3rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-description {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    /* Contact CTA */
+    .contact-cta {
+        padding: 6rem 0;
+        background: #111;
+        color: white;
+        text-align: center;
+    }
+
+    .cta-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    .cta-description {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        color: white;
+        box-shadow: 0 4px 15px rgba(255, 0, 128, 0.4);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(255, 0, 128, 0.6);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: translateY(-3px);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+        .story-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .story-stats {
+            position: static;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn {
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+</style>

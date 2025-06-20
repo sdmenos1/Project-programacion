@@ -1,0 +1,215 @@
+---
+export interface Props {
+    name: string;
+    category: string;
+    price: number;
+    description: string;
+    image: string;
+    ingredients: string[];
+    alcohol: number;
+    popular?: boolean;
+}
+
+const { name, category, price, description, image, ingredients, alcohol, popular = false } = Astro.props;
+---
+
+<article class="drink-card" data-category={category.toLowerCase()}>
+    <div class="card-image">
+        <img src={image || "/placeholder.svg"} alt={name} class="drink-image">
+        <div class="card-overlay">
+            {popular && <span class="popular-tag">⭐ Popular</span>}
+            <span class="alcohol-tag">{alcohol}% Vol.</span>
+        </div>
+    </div>
+    
+    <div class="card-content">
+        <div class="drink-header">
+            <h3 class="drink-name">{name}</h3>
+            <span class="drink-category">{category}</span>
+        </div>
+        
+        <p class="drink-description">{description}</p>
+        
+        <div class="ingredients-section">
+            <h4 class="ingredients-title">Ingredientes:</h4>
+            <ul class="ingredients-list">
+                {ingredients.map((ingredient) => (
+                    <li class="ingredient-item">{ingredient}</li>
+                ))}
+            </ul>
+        </div>
+        
+        <div class="card-footer">
+            <div class="price-section">
+                <span class="price-amount">${price}</span>
+            </div>
+            <button class="btn btn-order">Ordenar</button>
+        </div>
+    </div>
+</article>
+
+<style>
+    .drink-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .drink-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 0, 128, 0.3);
+    }
+
+    .card-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .drink-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        filter: grayscale(20%);
+    }
+
+    .drink-card:hover .drink-image {
+        transform: scale(1.1);
+        filter: grayscale(0%);
+    }
+
+    .card-overlay {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .popular-tag {
+        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        color: #000;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .alcohol-tag {
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+        color: white;
+    }
+
+    .drink-header {
+        margin-bottom: 1rem;
+    }
+
+    .drink-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #ff0080;
+    }
+
+    .drink-category {
+        background: rgba(121, 40, 202, 0.3);
+        color: #7928ca;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid rgba(121, 40, 202, 0.5);
+    }
+
+    .drink-description {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    .ingredients-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .ingredients-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #7928ca;
+        margin-bottom: 0.5rem;
+    }
+
+    .ingredients-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .ingredient-item {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .price-amount {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #ff0080;
+    }
+
+    .btn-order {
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-order:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 0, 128, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        .card-footer {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .btn-order {
+            width: 100%;
+        }
+    }
+</style>

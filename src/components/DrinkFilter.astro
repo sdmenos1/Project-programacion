@@ -1,0 +1,200 @@
+---
+export interface Props {
+    categories: string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div class="drink-filter">
+    <div class="filter-header">
+        <h3 class="filter-title">Filtrar Bebidas</h3>
+        <button class="clear-filters" id="clear-drink-filters">Limpiar Filtros</button>
+    </div>
+    
+    <div class="filter-options">
+        <div class="filter-group">
+            <label class="filter-label">Categoría:</label>
+            <select class="filter-select" id="category-filter">
+                <option value="">Todas las categorías</option>
+                {categories.map((category) => (
+                    <option value={category.toLowerCase()}>{category}</option>
+                ))}
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label class="filter-label">Precio:</label>
+            <select class="filter-select" id="drink-price-filter">
+                <option value="">Cualquier precio</option>
+                <option value="0-10">$0 - $10</option>
+                <option value="11-20">$11 - $20</option>
+                <option value="21-30">$21 - $30</option>
+                <option value="30+">$30+</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label class="filter-label">Contenido Alcohólico:</label>
+            <select class="filter-select" id="alcohol-filter">
+                <option value="">Cualquier graduación</option>
+                <option value="0-10">0% - 10%</option>
+                <option value="11-20">11% - 20%</option>
+                <option value="21-30">21% - 30%</option>
+                <option value="30+">30%+</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label class="filter-label">Populares:</label>
+            <select class="filter-select" id="popular-filter">
+                <option value="">Todas</option>
+                <option value="popular">Solo populares</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<style>
+    .drink-filter {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+    }
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .filter-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ff0080;
+    }
+
+    .clear-filters {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .clear-filters:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #ff0080;
+    }
+
+    .filter-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .filter-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .filter-select {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 0.75rem;
+        color: white;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: #ff0080;
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .filter-select option {
+        background: #1a1a1a;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .filter-header {
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .filter-options {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const categoryFilter = document.getElementById('category-filter');
+        const priceFilter = document.getElementById('drink-price-filter');
+        const alcoholFilter = document.getElementById('alcohol-filter');
+        const popularFilter = document.getElementById('popular-filter');
+        const clearFilters = document.getElementById('clear-drink-filters');
+        const drinksGrid = document.getElementById('drinks-grid');
+
+        function filterDrinks() {
+            const drinks = drinksGrid?.querySelectorAll('.drink-card');
+            const selectedCategory = categoryFilter?.value.toLowerCase();
+            const selectedPrice = priceFilter?.value;
+            const selectedAlcohol = alcoholFilter?.value;
+            const selectedPopular = popularFilter?.value;
+
+            drinks?.forEach(drink => {
+                let showDrink = true;
+
+                // Filter by category
+                if (selectedCategory && drink.dataset.category !== selectedCategory) {
+                    showDrink = false;
+                }
+
+                // Add more filter logic here based on your needs
+
+                // Show/hide drink
+                if (showDrink) {
+                    drink.style.display = 'block';
+                } else {
+                    drink.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listeners
+        categoryFilter?.addEventListener('change', filterDrinks);
+        priceFilter?.addEventListener('change', filterDrinks);
+        alcoholFilter?.addEventListener('change', filterDrinks);
+        popularFilter?.addEventListener('change', filterDrinks);
+
+        // Clear filters
+        clearFilters?.addEventListener('click', () => {
+            if (categoryFilter) categoryFilter.value = '';
+            if (priceFilter) priceFilter.value = '';
+            if (alcoholFilter) alcoholFilter.value = '';
+            if (popularFilter) popularFilter.value = '';
+            filterDrinks();
+        });
+    });
+</script>

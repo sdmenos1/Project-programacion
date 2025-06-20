@@ -1,22 +1,429 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+---
+export interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Kali Club - El mejor destino nocturno de la ciudad" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
+        
+        <!-- Preload critical fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<script src="/src/js/auth-global.js" is:inline></script>
+    </head>
+    <body>
+        <slot />
+		<div id="auth-modal" class="auth-modal">
+			<div class="auth-modal-content">
+				<button onclick="closeAuthModal()" class="auth-modal-close">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+				
+				<!-- Login Form -->
+				<div id="login-form" class="auth-form">
+					<div class="auth-header">
+						<h2 class="auth-title">Iniciar Sesión</h2>
+						<p class="auth-subtitle">Accede a tu cuenta de Kali Club</p>
+					</div>
+					
+					<form onsubmit="handleLogin(event)" class="auth-form-content">
+						<div class="form-group">
+							<label class="form-label">Email</label>
+							<input type="email" name="email" required class="form-input" placeholder="tu@email.com">
+						</div>
+						<div class="form-group">
+							<label class="form-label">Contraseña</label>
+							<input type="password" name="password" required class="form-input" placeholder="Tu contraseña">
+						</div>
+						<button type="submit" class="auth-btn primary">
+							Iniciar Sesión
+						</button>
+					</form>
+					
+					<p class="auth-switch">
+						¿No tienes cuenta? 
+						<button onclick="showRegisterForm()" class="auth-link">
+							Regístrate aquí
+						</button>
+					</p>
+				</div>
+
+				<!-- Register Form -->
+				<div id="register-form" class="auth-form hidden">
+					<div class="auth-header">
+						<h2 class="auth-title">Crear Cuenta</h2>
+						<p class="auth-subtitle">Únete a la experiencia Kali Club</p>
+					</div>
+					
+					<form onsubmit="handleRegister(event)" class="auth-form-content">
+						<div class="form-row">
+							<div class="form-group">
+								<label class="form-label">Nombre</label>
+								<input type="text" name="firstName" required class="form-input" placeholder="Tu nombre">
+							</div>
+							<div class="form-group">
+								<label class="form-label">Apellido</label>
+								<input type="text" name="lastName" required class="form-input" placeholder="Tu apellido">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="form-label">Usuario</label>
+							<input type="text" name="username" required class="form-input" placeholder="Nombre de usuario">
+						</div>
+						
+						<div class="form-group">
+							<label class="form-label">Email</label>
+							<input type="email" name="email" required class="form-input" placeholder="tu@email.com">
+						</div>
+						
+						<div class="form-group">
+							<label class="form-label">Contraseña</label>
+							<input type="password" name="password" required class="form-input" placeholder="Mínimo 6 caracteres">
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group">
+								<label class="form-label">Teléfono</label>
+								<input type="tel" name="phone" class="form-input" placeholder="+1 234 567 890">
+							</div>
+							<div class="form-group">
+								<label class="form-label">Fecha Nac.</label>
+								<input type="date" name="dateOfBirth" class="form-input">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="form-label">Género</label>
+							<select name="gender" class="form-input">
+								<option value="">Seleccionar...</option>
+								<option value="masculino">Masculino</option>
+								<option value="femenino">Femenino</option>
+								<option value="otro">Otro</option>
+								<option value="prefiero-no-decir">Prefiero no decir</option>
+							</select>
+						</div>
+						
+						<button type="submit" class="auth-btn primary">
+							Crear Cuenta
+						</button>
+					</form>
+					
+					<p class="auth-switch">
+						¿Ya tienes cuenta? 
+						<button onclick="showLoginForm()" class="auth-link">
+							Inicia sesión aquí
+						</button>
+					</p>
+				</div>
+			</div>
+		</div>
+    </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
+<style is:global>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-family: 'Inter', system-ui, sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: #000;
+        color: #fff;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* Scrollbar personalizado */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #e6006b, #6a1fb8);
+    }
+
+    /* Utilidades globales */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .text-gradient {
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Animaciones globales */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .animate-slide-left {
+        animation: slideInLeft 0.6s ease-out forwards;
+    }
+
+    .animate-slide-right {
+        animation: slideInRight 0.6s ease-out forwards;
+    }
+
+    /* Responsive helpers */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 1rem;
+        }
+    }
+
+	/* Auth Modal */
+	.auth-modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(10px);
+		z-index: 1000;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+	}
+
+	.auth-modal.show {
+		display: flex;
+	}
+
+	.auth-modal-content {
+		background: #1a1a1a;
+		border-radius: 20px;
+		padding: 2rem;
+		max-width: 500px;
 		width: 100%;
-		height: 100%;
+		position: relative;
+		border: 1px solid #333;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+	}
+
+	.auth-modal-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		color: #999;
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 50%;
+		transition: all 0.3s ease;
+	}
+
+	.auth-modal-close:hover {
+		color: #fff;
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	.auth-modal-close svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	/* Auth Forms */
+	.auth-form {
+		color: #fff;
+	}
+
+	.auth-form.hidden {
+		display: none;
+	}
+
+	.auth-header {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.auth-title {
+		font-size: 2rem;
+		font-weight: 900;
+		background: linear-gradient(45deg, #ff0080, #7928ca);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		margin-bottom: 0.5rem;
+	}
+
+	.auth-subtitle {
+		color: #999;
+		font-size: 0.9rem;
+	}
+
+	.auth-form-content {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.form-label {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #ccc;
+	}
+
+	.form-input {
+		padding: 1rem;
+		background: #2a2a2a;
+		border: 1px solid #444;
+		border-radius: 12px;
+		color: #fff;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+	}
+
+	.form-input:focus {
+		outline: none;
+		border-color: #ff0080;
+		box-shadow: 0 0 0 3px rgba(255, 0, 128, 0.1);
+	}
+
+	.form-input::placeholder {
+		color: #666;
+	}
+
+	.auth-btn {
+		padding: 1rem 2rem;
+		border: none;
+		border-radius: 12px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.auth-btn.primary {
+		background: linear-gradient(45deg, #ff0080, #7928ca);
+		color: #fff;
+	}
+
+	.auth-btn.primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 25px rgba(255, 0, 128, 0.3);
+	}
+
+	.auth-switch {
+		text-align: center;
+		margin-top: 1.5rem;
+		color: #999;
+		font-size: 0.9rem;
+	}
+
+	.auth-link {
+		background: none;
+		border: none;
+		color: #ff0080;
+		cursor: pointer;
+		font-weight: 600;
+		text-decoration: underline;
+	}
+
+	.auth-link:hover {
+		color: #ff3399;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.auth-modal-content {
+			padding: 1.5rem;
+			margin: 1rem;
+		}
+
+		.form-row {
+			grid-template-columns: 1fr;
+		}
+
+		.auth-title {
+			font-size: 1.5rem;
+		}
+	}
+
+	/* Utility */
+	.hidden {
+		display: none !important;
 	}
 </style>

@@ -1,0 +1,295 @@
+---
+export interface Props {
+    eventId: number;
+    eventTitle: string;
+    eventPrice: number;
+}
+
+const { eventId, eventTitle, eventPrice } = Astro.props;
+---
+
+<div class="reservation-form">
+    <div class="form-header">
+        <h3 class="form-title">Reservar Entrada</h3>
+        <p class="form-subtitle">Asegura tu lugar en {eventTitle}</p>
+    </div>
+    
+    <form class="reservation-form-content" id="reservation-form">
+        <input type="hidden" name="eventId" value={eventId}>
+        
+        <div class="form-group">
+            <label class="form-label">Tipo de Entrada:</label>
+            <select class="form-select" name="ticketType" required>
+                <option value="">Selecciona tipo</option>
+                <option value="general" data-price={eventPrice}>General - ${eventPrice}</option>
+                <option value="vip" data-price={eventPrice * 1.5}>VIP - ${eventPrice * 1.5}</option>
+                <option value="premium" data-price={eventPrice * 2}>Premium - ${eventPrice * 2}</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Cantidad de Entradas:</label>
+            <select class="form-select" name="quantity" required>
+                <option value="">Selecciona cantidad</option>
+                <option value="1">1 entrada</option>
+                <option value="2">2 entradas</option>
+                <option value="3">3 entradas</option>
+                <option value="4">4 entradas</option>
+                <option value="5">5 entradas</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Nombre Completo:</label>
+            <input type="text" class="form-input" name="fullName" required placeholder="Tu nombre completo">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Email:</label>
+            <input type="email" class="form-input" name="email" required placeholder="tu@email.com">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Teléfono:</label>
+            <input type="tel" class="form-input" name="phone" required placeholder="+1 234 567 8900">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Comentarios Especiales:</label>
+            <textarea class="form-textarea" name="comments" placeholder="Alguna solicitud especial..."></textarea>
+        </div>
+        
+        <div class="price-summary">
+            <div class="price-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0</span>
+            </div>
+            <div class="price-row">
+                <span>Impuestos (10%):</span>
+                <span id="taxes">$0</span>
+            </div>
+            <div class="price-row total">
+                <span>Total:</span>
+                <span id="total">$0</span>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn-reserve">
+            <span class="btn-text">Reservar Ahora</span>
+            <span class="btn-icon">🎫</span>
+        </button>
+        
+        <p class="form-disclaimer">
+            * Al reservar aceptas nuestros términos y condiciones. 
+            Recibirás un email de confirmación con los detalles de tu reserva.
+        </p>
+    </form>
+</div>
+
+<style>
+    .reservation-form {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        color: white;
+        position: sticky;
+        top: 100px;
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #ff0080;
+    }
+
+    .form-subtitle {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+    }
+
+    .form-select,
+    .form-input,
+    .form-textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 0.75rem;
+        color: white;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-select:focus,
+    .form-input:focus,
+    .form-textarea:focus {
+        outline: none;
+        border-color: #ff0080;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 0 2px rgba(255, 0, 128, 0.2);
+    }
+
+    .form-select option {
+        background: #1a1a1a;
+        color: white;
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .price-summary {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .price-row.total {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 0.75rem;
+        margin-top: 1rem;
+        margin-bottom: 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #ff0080;
+    }
+
+    .btn-reserve {
+        width: 100%;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 2rem;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .btn-reserve:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4);
+    }
+
+    .btn-reserve:active {
+        transform: translateY(0);
+    }
+
+    .btn-icon {
+        font-size: 1.2rem;
+    }
+
+    .form-disclaimer {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+        .reservation-form {
+            position: static;
+            margin-top: 2rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('reservation-form');
+        const ticketTypeSelect = form?.querySelector('select[name="ticketType"]');
+        const quantitySelect = form?.querySelector('select[name="quantity"]');
+        const subtotalElement = document.getElementById('subtotal');
+        const taxesElement = document.getElementById('taxes');
+        const totalElement = document.getElementById('total');
+
+        function updatePricing() {
+            const ticketType = ticketTypeSelect?.value;
+            const quantity = parseInt(quantitySelect?.value || '0');
+            
+            if (!ticketType || !quantity) {
+                if (subtotalElement) subtotalElement.textContent = '$0';
+                if (taxesElement) taxesElement.textContent = '$0';
+                if (totalElement) totalElement.textContent = '$0';
+                return;
+            }
+
+            const selectedOption = ticketTypeSelect?.querySelector(`option[value="${ticketType}"]`);
+            const price = parseFloat(selectedOption?.dataset.price || '0');
+            
+            const subtotal = price * quantity;
+            const taxes = subtotal * 0.1;
+            const total = subtotal + taxes;
+
+            if (subtotalElement) subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            if (taxesElement) taxesElement.textContent = `$${taxes.toFixed(2)}`;
+            if (totalElement) totalElement.textContent = `$${total.toFixed(2)}`;
+        }
+
+        ticketTypeSelect?.addEventListener('change', updatePricing);
+        quantitySelect?.addEventListener('change', updatePricing);
+
+        form?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const submitButton = form.querySelector('.btn-reserve');
+            const originalText = submitButton?.querySelector('.btn-text')?.textContent;
+            
+            if (submitButton && originalText) {
+                submitButton.disabled = true;
+                submitButton.querySelector('.btn-text').textContent = 'Procesando...';
+                
+                setTimeout(() => {
+                    alert('¡Reserva realizada con éxito! Recibirás un email de confirmación.');
+                    submitButton.disabled = false;
+                    submitButton.querySelector('.btn-text').textContent = originalText;
+                    form.reset();
+                    updatePricing();
+                }, 2000);
+            }
+        });
+    });
+</script>

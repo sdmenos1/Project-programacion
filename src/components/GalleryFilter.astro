@@ -1,0 +1,139 @@
+---
+---
+
+<div class="gallery-filter">
+    <div class="filter-header">
+        <h3 class="filter-title">Filtrar Galería</h3>
+        <button class="clear-filters" id="clear-gallery-filters">Mostrar Todo</button>
+    </div>
+    
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="eventos">Eventos</button>
+        <button class="filter-btn" data-filter="interior">Interior</button>
+        <button class="filter-btn" data-filter="djs">DJs</button>
+        <button class="filter-btn" data-filter="ambiente">Ambiente</button>
+        <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+    </div>
+</div>
+
+<style>
+    .gallery-filter {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+    }
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .filter-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ff0080;
+    }
+
+    .clear-filters {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .clear-filters:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #ff0080;
+    }
+
+    .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .filter-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .filter-header {
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .filter-buttons {
+            justify-content: center;
+        }
+
+        .filter-btn {
+            flex: 1;
+            min-width: 120px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const clearButton = document.getElementById('clear-gallery-filters');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active button
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter items
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeInUp 0.5s ease forwards';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        clearButton?.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            filterButtons[0].classList.add('active');
+            
+            galleryItems.forEach(item => {
+                item.style.display = 'block';
+                item.style.animation = 'fadeInUp 0.5s ease forwards';
+            });
+        });
+    });
+</script>

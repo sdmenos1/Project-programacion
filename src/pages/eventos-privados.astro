@@ -1,0 +1,439 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Eventos Privados - Kali Club">
+    <Header />
+    
+    <main class="private-events-page">
+        <section class="private-events-hero">
+            <div class="container">
+                <h1 class="page-title">Eventos Privados</h1>
+                <p class="page-subtitle">Crea momentos únicos e inolvidables en nuestros espacios exclusivos</p>
+            </div>
+        </section>
+
+        <section class="services-overview">
+            <div class="container">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🎉</div>
+                        <h3 class="service-title">Cumpleaños VIP</h3>
+                        <p class="service-description">Celebra tu día especial con un paquete completo que incluye decoración, pastel y servicio personalizado.</p>
+                        <ul class="service-features">
+                            <li>Área privada exclusiva</li>
+                            <li>Decoración temática</li>
+                            <li>Pastel personalizado</li>
+                            <li>Servicio de mesero dedicado</li>
+                            <li>Sesión fotográfica</li>
+                        </ul>
+                        <div class="service-price">Desde $500</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">💼</div>
+                        <h3 class="service-title">Eventos Corporativos</h3>
+                        <p class="service-description">Espacios profesionales para lanzamientos, conferencias y celebraciones empresariales.</p>
+                        <ul class="service-features">
+                            <li>Salones con capacidad variable</li>
+                            <li>Equipos audiovisuales</li>
+                            <li>Catering empresarial</li>
+                            <li>Servicio de valet parking</li>
+                            <li>Coordinador de eventos</li>
+                        </ul>
+                        <div class="service-price">Desde $1,200</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">💒</div>
+                        <h3 class="service-title">Bodas & Aniversarios</h3>
+                        <p class="service-description">Celebra el amor en un ambiente elegante y sofisticado con servicios de lujo.</p>
+                        <ul class="service-features">
+                            <li>Terraza con vista panorámica</li>
+                            <li>Menú de gala personalizado</li>
+                            <li>Coordinación completa</li>
+                            <li>Decoración floral</li>
+                            <li>Música en vivo opcional</li>
+                        </ul>
+                        <div class="service-price">Desde $2,000</div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🎓</div>
+                        <h3 class="service-title">Graduaciones</h3>
+                        <p class="service-description">Celebra tus logros académicos con una fiesta memorable para ti y tus seres queridos.</p>
+                        <ul class="service-features">
+                            <li>Paquetes para grupos</li>
+                            <li>Menú especial estudiantes</li>
+                            <li>Área de fotos temática</li>
+                            <li>DJ especializado</li>
+                            <li>Precios preferenciales</li>
+                        </ul>
+                        <div class="service-price">Desde $300</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spaces-showcase">
+            <div class="container">
+                <h2 class="section-title">Nuestros Espacios</h2>
+                <div class="spaces-grid">
+                    <div class="space-card">
+                        <img src="/pictures/spaces/vip-lounge.jpg" alt="VIP Lounge" class="space-image">
+                        <div class="space-content">
+                            <h3 class="space-name">VIP Lounge</h3>
+                            <p class="space-description">Área exclusiva con vista panorámica, perfecta para eventos íntimos de hasta 30 personas.</p>
+                            <div class="space-specs">
+                                <span class="spec">👥 Hasta 30 personas</span>
+                                <span class="spec">🍸 Bar privado</span>
+                                <span class="spec">🎵 Sistema de sonido</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-card">
+                        <img src="/pictures/spaces/main-hall.jpg" alt="Salón Principal" class="space-image">
+                        <div class="space-content">
+                            <h3 class="space-name">Salón Principal</h3>
+                            <p class="space-description">Nuestro espacio más amplio con pista de baile y escenario para eventos grandes.</p>
+                            <div class="space-specs">
+                                <span class="spec">👥 Hasta 200 personas</span>
+                                <span class="spec">🎤 Escenario profesional</span>
+                                <span class="spec">💃 Pista de baile</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-card">
+                        <img src="/pictures/spaces/terrace.jpg" alt="Terraza" class="space-image">
+                        <div class="space-content">
+                            <h3 class="space-name">Terraza</h3>
+                            <p class="space-description">Espacio al aire libre con vista a la ciudad, ideal para cócteles y ceremonias.</p>
+                            <div class="space-specs">
+                                <span class="spec">👥 Hasta 80 personas</span>
+                                <span class="spec">🌃 Vista panorámica</span>
+                                <span class="spec">🌟 Ambiente al aire libre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">¿Listo para Planear tu Evento?</h2>
+                    <p class="cta-description">
+                        Nuestro equipo de expertos está listo para hacer realidad tu evento soñado. 
+                        Contáctanos para una consulta personalizada gratuita.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="/contacto" class="btn-primary">Solicitar Cotización</a>
+                        <a href="tel:+15551234567" class="btn-secondary">Llamar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .private-events-page {
+        padding-top: 80px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        color: white;
+    }
+
+    .private-events-hero {
+        padding: 6rem 0;
+        text-align: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                    url('/pictures/private-events/hero.jpg') center/cover;
+    }
+
+    .page-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .page-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .services-overview {
+        padding: 6rem 0;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .service-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(255, 0, 128, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .service-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .service-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: #ff0080;
+    }
+
+    .service-description {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .service-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 2rem;
+        text-align: left;
+    }
+
+    .service-features li {
+        padding: 0.5rem 0;
+        color: rgba(255, 255, 255, 0.8);
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .service-features li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #7928ca;
+        font-weight: bold;
+    }
+
+    .service-price {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #7928ca;
+        background: rgba(121, 40, 202, 0.1);
+        padding: 1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(121, 40, 202, 0.3);
+    }
+
+    .spaces-showcase {
+        padding: 6rem 0;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .spaces-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .space-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .space-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .space-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .space-card:hover .space-image {
+        transform: scale(1.1);
+    }
+
+    .space-content {
+        padding: 2rem;
+    }
+
+    .space-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #ff0080;
+    }
+
+    .space-description {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .space-specs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .spec {
+        background: rgba(121, 40, 202, 0.2);
+        color: #7928ca;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(121, 40, 202, 0.3);
+    }
+
+    .contact-cta {
+        padding: 6rem 0;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        text-align: center;
+    }
+
+    .cta-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+
+    .cta-description {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        background: white;
+        color: #ff0080;
+    }
+
+    .btn-primary:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+        background: white;
+        color: #ff0080;
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .spaces-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+</style>

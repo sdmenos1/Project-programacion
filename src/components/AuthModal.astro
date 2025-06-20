@@ -1,0 +1,554 @@
+---
+// Modal de autenticación
+---
+
+<div class="auth-modal" id="auth-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Login Form -->
+        <div class="auth-form" id="login-form">
+            <div class="form-header">
+                <h2 class="form-title">Iniciar Sesión</h2>
+                <p class="form-subtitle">Accede a tu cuenta de Kali Club</p>
+            </div>
+
+            <form id="login-form-element">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email" required placeholder="tu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-input" name="password" required placeholder="Tu contraseña">
+                </div>
+
+                <button type="submit" class="btn-submit" id="login-submit">
+                    <span class="btn-text">Iniciar Sesión</span>
+                    <div class="btn-loader hidden">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+
+                <div class="form-error hidden" id="login-error"></div>
+            </form>
+
+            <div class="form-footer">
+                <p>¿No tienes cuenta? <button class="link-btn" id="show-register">Regístrate aquí</button></p>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div class="auth-form hidden" id="register-form">
+            <div class="form-header">
+                <h2 class="form-title">Crear Cuenta</h2>
+                <p class="form-subtitle">Únete a la experiencia Kali Club</p>
+            </div>
+
+            <form id="register-form-element">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-input" name="firstName" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Apellido</label>
+                        <input type="text" class="form-input" name="lastName" required placeholder="Tu apellido">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-input" name="username" required placeholder="Nombre de usuario">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email" required placeholder="tu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-input" name="password" required placeholder="Mínimo 6 caracteres">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Teléfono (opcional)</label>
+                        <input type="tel" class="form-input" name="phone" placeholder="+1 234 567 8900">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-input" name="dateOfBirth">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Género (opcional)</label>
+                    <select class="form-select" name="gender">
+                        <option value="">Seleccionar</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                        <option value="prefiero-no-decir">Prefiero no decir</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit" id="register-submit">
+                    <span class="btn-text">Crear Cuenta</span>
+                    <div class="btn-loader hidden">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+
+                <div class="form-error hidden" id="register-error"></div>
+            </form>
+
+            <div class="form-footer">
+                <p>¿Ya tienes cuenta? <button class="link-btn" id="show-login">Inicia sesión aquí</button></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .auth-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .auth-modal.active {
+        display: flex;
+    }
+
+    .modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+    }
+
+    .modal-content {
+        position: relative;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 3rem;
+        max-width: 500px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: white;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-close svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .auth-form.hidden {
+        display: none;
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .form-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .form-subtitle {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+    }
+
+    .form-input,
+    .form-select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 1rem;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+        outline: none;
+        border-color: #ff0080;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 0 2px rgba(255, 0, 128, 0.2);
+    }
+
+    .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .form-select option {
+        background: #1a1a1a;
+        color: white;
+    }
+
+    .btn-submit {
+        width: 100%;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 2rem;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .btn-loader {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-loader.hidden {
+        display: none;
+    }
+
+    .spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .form-error {
+        background: rgba(220, 38, 38, 0.1);
+        border: 1px solid rgba(220, 38, 38, 0.3);
+        color: #fca5a5;
+        padding: 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-error.hidden {
+        display: none;
+    }
+
+    .form-footer {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-footer p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+    }
+
+    .link-btn {
+        background: none;
+        border: none;
+        color: #ff0080;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+    }
+
+    .link-btn:hover {
+        color: #7928ca;
+    }
+
+    @media (max-width: 768px) {
+        .modal-content {
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('auth-modal');
+    const overlay = document.getElementById('modal-overlay');
+    const closeBtn = document.getElementById('modal-close');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const showRegisterBtn = document.getElementById('show-register');
+    const showLoginBtn = document.getElementById('show-login');
+    const loginFormElement = document.getElementById('login-form-element');
+    const registerFormElement = document.getElementById('register-form-element');
+
+    // Auth Store simple (sin importaciones complejas)
+    const authAPI = {
+        async login(email, password) {
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('auth_user', JSON.stringify(data.user));
+                    return { success: true };
+                } else {
+                    return { success: false, error: data.error };
+                }
+            } catch (error) {
+                return { success: false, error: 'Error de conexión' };
+            }
+        },
+
+        async register(userData) {
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    localStorage.setItem('auth_token', data.token);
+                    localStorage.setItem('auth_user', JSON.stringify(data.user));
+                    return { success: true };
+                } else {
+                    return { success: false, error: data.error };
+                }
+            } catch (error) {
+                return { success: false, error: 'Error de conexión' };
+            }
+        }
+    };
+
+    // Funciones para mostrar/ocultar modal
+    function showModal() {
+        modal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+        modal?.classList.remove('active');
+        document.body.style.overflow = '';
+        loginFormElement?.reset();
+        registerFormElement?.reset();
+        hideErrors();
+    }
+
+    function showLogin() {
+        loginForm?.classList.remove('hidden');
+        registerForm?.classList.add('hidden');
+    }
+
+    function showRegister() {
+        loginForm?.classList.add('hidden');
+        registerForm?.classList.remove('hidden');
+    }
+
+    function showError(formType, message) {
+        const errorElement = document.getElementById(`${formType}-error`);
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+    }
+
+    function hideErrors() {
+        const loginError = document.getElementById('login-error');
+        const registerError = document.getElementById('register-error');
+        loginError?.classList.add('hidden');
+        registerError?.classList.add('hidden');
+    }
+
+    function setLoading(formType, loading) {
+        const submitBtn = document.getElementById(`${formType}-submit`);
+        const btnText = submitBtn?.querySelector('.btn-text');
+        const btnLoader = submitBtn?.querySelector('.btn-loader');
+
+        if (submitBtn && btnText && btnLoader) {
+            submitBtn.disabled = loading;
+            if (loading) {
+                btnText.style.opacity = '0';
+                btnLoader.classList.remove('hidden');
+            } else {
+                btnText.style.opacity = '1';
+                btnLoader.classList.add('hidden');
+            }
+        }
+    }
+
+    // Event listeners
+    overlay?.addEventListener('click', hideModal);
+    closeBtn?.addEventListener('click', hideModal);
+    showRegisterBtn?.addEventListener('click', showRegister);
+    showLoginBtn?.addEventListener('click', showLogin);
+
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal?.classList.contains('active')) {
+            hideModal();
+        }
+    });
+
+    // Login form
+    loginFormElement?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideErrors();
+        setLoading('login', true);
+
+        const formData = new FormData(e.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        const result = await authAPI.login(email, password);
+
+        if (result.success) {
+            hideModal();
+            window.location.reload();
+        } else {
+            showError('login', result.error || 'Error al iniciar sesión');
+        }
+
+        setLoading('login', false);
+    });
+
+    // Register form
+    registerFormElement?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideErrors();
+        setLoading('register', true);
+
+        const formData = new FormData(e.target);
+        const userData = {
+            username: formData.get('username'),
+            email: formData.get('email'),
+            password: formData.get('password'),
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            phone: formData.get('phone') || undefined,
+            dateOfBirth: formData.get('dateOfBirth') || undefined,
+            gender: formData.get('gender') || undefined,
+        };
+
+        const result = await authAPI.register(userData);
+
+        if (result.success) {
+            hideModal();
+            window.location.reload();
+        } else {
+            showError('register', result.error || 'Error al crear cuenta');
+        }
+
+        setLoading('register', false);
+    });
+
+    // Exponer funciones globalmente
+    window.showAuthModal = showModal;
+    window.showLoginForm = () => {
+        showModal();
+        showLogin();
+    };
+    window.showRegisterForm = () => {
+        showModal();
+        showRegister();
+    };
+});
+</script>
