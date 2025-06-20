@@ -1,0 +1,152 @@
+const drinksData = [
+	{
+		name: "Mojito Clásico",
+		category: "Cocteles",
+		price: 12,
+		description: "Refrescante combinación de ron blanco, menta fresca, lima y agua con gas",
+		image: "/pictures/drinks/mojito.jpg",
+		ingredients: [
+			"Ron blanco",
+			"Menta fresca",
+			"Lima",
+			"Azúcar",
+			"Agua con gas"
+		],
+		alcohol: 15,
+		popular: true
+	},
+	{
+		name: "Whiskey Sour",
+		category: "Cocteles",
+		price: 15,
+		description: "Clásico coctel con whiskey bourbon, jugo de limón y jarabe simple",
+		image: "/pictures/drinks/whiskey-sour.jpg",
+		ingredients: [
+			"Whiskey bourbon",
+			"Jugo de limón",
+			"Jarabe simple",
+			"Clara de huevo"
+		],
+		alcohol: 25,
+		popular: false
+	},
+	{
+		name: "Margarita Premium",
+		category: "Cocteles",
+		price: 18,
+		description: "Tequila premium con triple sec, jugo de lima fresca y sal de mar",
+		image: "/pictures/drinks/margarita.jpg",
+		ingredients: [
+			"Tequila premium",
+			"Triple sec",
+			"Jugo de lima",
+			"Sal de mar"
+		],
+		alcohol: 20,
+		popular: true
+	},
+	{
+		name: "Cosmopolitan",
+		category: "Cocteles",
+		price: 16,
+		description: "Elegante mezcla de vodka, triple sec, jugo de arándano y lima",
+		image: "/pictures/drinks/cosmopolitan.jpg",
+		ingredients: [
+			"Vodka",
+			"Triple sec",
+			"Jugo de arándano",
+			"Jugo de lima"
+		],
+		alcohol: 18,
+		popular: false
+	},
+	{
+		name: "Cerveza Artesanal IPA",
+		category: "Cervezas",
+		price: 8,
+		description: "Cerveza artesanal con intenso sabor a lúpulo y notas cítricas",
+		image: "/pictures/drinks/ipa-beer.jpg",
+		ingredients: [
+			"Malta",
+			"Lúpulo",
+			"Levadura",
+			"Agua"
+		],
+		alcohol: 6,
+		popular: true
+	},
+	{
+		name: "Cerveza Lager",
+		category: "Cervezas",
+		price: 6,
+		description: "Cerveza ligera y refrescante, perfecta para cualquier ocasión",
+		image: "/pictures/drinks/lager-beer.jpg",
+		ingredients: [
+			"Malta",
+			"Lúpulo",
+			"Levadura",
+			"Agua"
+		],
+		alcohol: 5,
+		popular: false
+	},
+	{
+		name: "Vodka Premium",
+		category: "Licores",
+		price: 25,
+		description: "Vodka destilado cinco veces para una pureza excepcional",
+		image: "/pictures/drinks/vodka-premium.jpg",
+		ingredients: [
+			"Trigo premium",
+			"Agua filtrada"
+		],
+		alcohol: 40,
+		popular: false
+	},
+	{
+		name: "Ron Añejo",
+		category: "Licores",
+		price: 30,
+		description: "Ron envejecido en barricas de roble con notas de vainilla y caramelo",
+		image: "/pictures/drinks/ron-anejo.jpg",
+		ingredients: [
+			"Caña de azúcar",
+			"Levadura",
+			"Agua"
+		],
+		alcohol: 38,
+		popular: true
+	},
+	{
+		name: "Piña Colada",
+		category: "Tropicales",
+		price: 14,
+		description: "Cremosa mezcla tropical de ron, piña y coco",
+		image: "/pictures/drinks/pina-colada.jpg",
+		ingredients: [
+			"Ron blanco",
+			"Jugo de piña",
+			"Crema de coco",
+			"Hielo"
+		],
+		alcohol: 12,
+		popular: true
+	},
+	{
+		name: "Daiquiri de Fresa",
+		category: "Tropicales",
+		price: 13,
+		description: "Refrescante daiquiri con fresas frescas y ron blanco",
+		image: "/pictures/drinks/daiquiri-fresa.jpg",
+		ingredients: [
+			"Ron blanco",
+			"Fresas frescas",
+			"Jugo de lima",
+			"Azúcar"
+		],
+		alcohol: 15,
+		popular: false
+	}
+];
+
+export { drinksData as d };

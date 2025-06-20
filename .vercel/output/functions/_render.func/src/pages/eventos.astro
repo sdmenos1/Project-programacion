@@ -1,0 +1,535 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EventCard from '../components/EventCard.astro';
+import EventFilter from '../components/EventFilter.astro';
+import eventsData from '../data/events.json';
+
+const events = eventsData;
+---
+
+<Layout title="Eventos - Kali Club">
+    <Header />
+    
+    <main class="events-page">
+        <section class="events-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="page-title">Próximos Eventos</h1>
+                    <p class="page-subtitle">Vive las mejores noches con los mejores artistas</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">{events.length}</span>
+                            <span class="stat-label">Eventos Programados</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">{events.filter(e => e.ticketsLeft > 0).length}</span>
+                            <span class="stat-label">Con Entradas Disponibles</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">{new Set(events.map(e => e.genre)).size}</span>
+                            <span class="stat-label">Géneros Musicales</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-cards">
+                        {events.slice(0, 3).map((event, index) => (
+                            <div class="floating-card" style={`animation-delay: ${index * 0.5}s`}>
+                                <img src={event.image || "/placeholder.svg"} alt={event.title} class="card-image">
+                                <div class="card-info">
+                                    <h3 class="card-title">{event.title}</h3>
+                                    <p class="card-artist">{event.artist}</p>
+                                    <span class="card-date">{event.date}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-content">
+            <div class="container">
+                <EventFilter />
+                
+                <div class="events-grid" id="events-grid">
+                    {events.map((event, index) => (
+                        <div style={`animation-delay: ${index * 0.1}s`}>
+                            <EventCard 
+                                id={event.id}
+                                title={event.title}
+                                date={event.date}
+                                time={event.time}
+                                artist={event.artist}
+                                genre={event.genre}
+                                price={event.price}
+                                image={event.image}
+                                description={event.description}
+                                venue={event.venue}
+                                capacity={event.capacity}
+                                ticketsLeft={event.ticketsLeft}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                <div class="load-more-section">
+                    <button class="btn-load-more" id="load-more">
+                        <span>Cargar Más Eventos</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2 class="newsletter-title">No Te Pierdas Ningún Evento</h2>
+                        <p class="newsletter-description">
+                            Suscríbete a nuestro newsletter y sé el primero en enterarte de nuevos eventos, 
+                            ofertas especiales y acceso anticipado a las entradas.
+                        </p>
+                    </div>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" class="newsletter-input" placeholder="Tu email" required>
+                            <button type="submit" class="newsletter-btn">
+                                <span>Suscribirse</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="newsletter-disclaimer">
+                            Al suscribirte aceptas recibir emails promocionales. Puedes darte de baja en cualquier momento.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .events-page {
+        padding-top: 80px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .events-hero {
+        padding: 6rem 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                    url('/pictures/events/events-hero.jpg') center/cover;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .events-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 70%, rgba(255, 0, 128, 0.2) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 30%, rgba(121, 40, 202, 0.2) 0%, transparent 50%);
+    }
+
+    .events-hero .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-content {
+        color: white;
+    }
+
+    .page-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .page-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 3rem;
+        line-height: 1.6;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .stat {
+        text-align: center;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .stat:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 0, 128, 0.3);
+    }
+
+    .stat-number {
+        display: block;
+        font-size: 2rem;
+        font-weight: 900;
+        color: #ff0080;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .hero-visual {
+        position: relative;
+        height: 400px;
+    }
+
+    .floating-cards {
+        position: relative;
+        height: 100%;
+    }
+
+    .floating-card {
+        position: absolute;
+        width: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        overflow: hidden;
+        animation: float 6s ease-in-out infinite;
+        transition: all 0.3s ease;
+    }
+
+    .floating-card:nth-child(1) {
+        top: 0;
+        left: 0;
+        z-index: 3;
+    }
+
+    .floating-card:nth-child(2) {
+        top: 100px;
+        right: 0;
+        z-index: 2;
+        animation-delay: 2s;
+    }
+
+    .floating-card:nth-child(3) {
+        bottom: 0;
+        left: 50px;
+        z-index: 1;
+        animation-delay: 4s;
+    }
+
+    .floating-card:hover {
+        transform: scale(1.05) translateY(-10px);
+        z-index: 4;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .card-info {
+        padding: 1rem;
+        color: white;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: #ff0080;
+    }
+
+    .card-artist {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0.5rem;
+    }
+
+    .card-date {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .events-content {
+        padding: 6rem 0;
+    }
+
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .events-grid > div {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .load-more-section {
+        text-align: center;
+        margin-top: 4rem;
+    }
+
+    .btn-load-more {
+        background: linear-gradient(45deg, #ff0080, #7928ca);
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 2rem;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .btn-load-more:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4);
+    }
+
+    .btn-icon {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-load-more:hover .btn-icon {
+        transform: translateY(2px);
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+        padding: 6rem 0;
+        background: linear-gradient(135deg, #ff0080, #7928ca);
+        color: white;
+    }
+
+    .newsletter-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .newsletter-title {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    .newsletter-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    .newsletter-form {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-group {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .newsletter-input {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        padding: 1rem;
+        color: white;
+        font-size: 1rem;
+    }
+
+    .newsletter-input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .newsletter-input:focus {
+        outline: none;
+        border-color: white;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .newsletter-btn {
+        background: white;
+        color: #ff0080;
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .newsletter-btn:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: translateY(-2px);
+    }
+
+    .newsletter-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .newsletter-disclaimer {
+        font-size: 0.8rem;
+        opacity: 0.8;
+        line-height: 1.4;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        33% { transform: translateY(-10px) rotate(1deg); }
+        66% { transform: translateY(5px) rotate(-1deg); }
+    }
+
+    @media (max-width: 1024px) {
+        .events-hero .container {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .hero-visual {
+            height: 300px;
+        }
+
+        .newsletter-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .events-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .hero-stats {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .floating-card {
+            width: 150px;
+        }
+
+        .floating-card .card-image {
+            height: 80px;
+        }
+
+        .floating-card .card-info {
+            padding: 0.75rem;
+        }
+
+        .form-group {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loadMoreBtn = document.getElementById('load-more') as HTMLButtonElement | null;
+        const newsletterForm = document.getElementById('newsletter-form');
+
+        // Load more functionality (simulated)
+        loadMoreBtn?.addEventListener('click', () => {
+            loadMoreBtn.disabled = true;
+            loadMoreBtn.innerHTML = '<span>Cargando...</span>';
+            
+            setTimeout(() => {
+                loadMoreBtn.innerHTML = '<span>No hay más eventos</span>';
+                loadMoreBtn.style.opacity = '0.6';
+            }, 1500);
+        });
+
+        // Newsletter form
+        newsletterForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = newsletterForm.querySelector('.newsletter-btn');
+            if (submitBtn) {
+                const originalContent = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<span>Suscribiendo...</span>';
+                (submitBtn as HTMLButtonElement).disabled = true;
+                
+                setTimeout(() => {
+                    alert('¡Suscripción exitosa! Recibirás noticias de nuestros eventos.');
+                    submitBtn.innerHTML = originalContent;
+                    (submitBtn as HTMLButtonElement).disabled = false;
+                    (newsletterForm as HTMLFormElement).reset();
+                }, 2000);
+            }
+        });
+    });
+</script>

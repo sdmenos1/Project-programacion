@@ -363,6 +363,14 @@
 </style>
 
 <script>
+// Extiende la interfaz Window para las funciones globales personalizadas
+declare global {
+    interface Window {
+        showAuthModal: () => void;
+        showLoginForm: () => void;
+        showRegisterForm: () => void;
+    }
+}
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('auth-modal');
     const overlay = document.getElementById('modal-overlay');
