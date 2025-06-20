@@ -145,10 +145,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const genreFilter = document.getElementById('genre-filter');
-        const priceFilter = document.getElementById('price-filter');
-        const availabilityFilter = document.getElementById('availability-filter');
-        const dateFilter = document.getElementById('date-filter');
+        const genreFilter = document.getElementById('genre-filter') as HTMLSelectElement | null;
+        const priceFilter = document.getElementById('price-filter') as HTMLSelectElement | null;
+        const availabilityFilter = document.getElementById('availability-filter') as HTMLSelectElement | null;
+        const dateFilter = document.getElementById('date-filter') as HTMLInputElement | null;
         const clearFilters = document.getElementById('clear-filters');
         const eventsGrid = document.getElementById('events-grid');
 
@@ -163,14 +163,15 @@
                 let showEvent = true;
 
                 // Filter by genre
-                if (selectedGenre && event.dataset.genre !== selectedGenre) {
+                const eventEl = event as HTMLElement;
+                if (selectedGenre && eventEl.dataset.genre !== selectedGenre) {
                     showEvent = false;
                 }
 
                 // Filter by price (you would need to add price data attributes to events)
                 if (selectedPrice && showEvent) {
                     const priceElement = event.querySelector('.price-amount');
-                    if (priceElement) {
+                    if (priceElement && priceElement.textContent) {
                         const price = parseInt(priceElement.textContent.replace('$', ''));
                         const [min, max] = selectedPrice.includes('+') 
                             ? [parseInt(selectedPrice.replace('+', '')), Infinity]
@@ -184,9 +185,9 @@
 
                 // Show/hide event
                 if (showEvent) {
-                    event.style.display = 'block';
+                    (event as HTMLElement).style.display = 'block';
                 } else {
-                    event.style.display = 'none';
+                    (event as HTMLElement).style.display = 'none';
                 }
             });
         }

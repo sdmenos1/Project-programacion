@@ -442,7 +442,7 @@ const galleryImages = [
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement | null;
         const lightboxTitle = document.getElementById('lightbox-title');
         const lightboxClose = document.getElementById('lightbox-close');
         const lightboxPrev = document.getElementById('lightbox-prev');
@@ -490,9 +490,9 @@ const galleryImages = [
         function showLightbox() {
             const currentImage = images[currentImageIndex];
             const container = currentImage.closest('.gallery-item');
-            const title = container.querySelector('.image-title')?.textContent || '';
+            const title = container ? container.querySelector('.image-title')?.textContent || '' : '';
             
-            if (lightboxImage && lightboxTitle && lightbox) {
+            if (lightboxImage && lightboxTitle && lightbox && currentImage instanceof HTMLImageElement) {
                 lightboxImage.src = currentImage.src;
                 lightboxImage.alt = currentImage.alt;
                 lightboxTitle.textContent = title;
@@ -509,7 +509,7 @@ const galleryImages = [
         // Share functionality
         shareButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                const title = btn.dataset.title;
+                const title = (btn as HTMLElement).dataset.title;
                 if (navigator.share) {
                     navigator.share({
                         title: `${title} - Kali Club`,

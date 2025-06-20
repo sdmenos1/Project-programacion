@@ -1,4 +1,4 @@
-import { query, transaction} from "./database"
+import { query } from "./database"
 
 export interface EventReservation {
   id: string
@@ -52,62 +52,62 @@ export interface CreateTableReservationData {
 }
 
 // Crear reserva de evento
-export async function createEventReservation(data: CreateEventReservationData): Promise<EventReservation> {
-  const { userId, eventId, ticketType, quantity, specialRequests } = data
+// export async function createEventReservation(data: CreateEventReservationData): Promise<EventReservation> {
+//   const { userId, eventId, ticketType, quantity, specialRequests } = data
 
-  return await transaction(async (client) => {
-    // Obtener información del evento
-    const eventResult = await client.query(
-      "SELECT price, capacity, tickets_sold FROM events WHERE id = $1 AND is_active = true",
-      [eventId],
-    )
+//   return await transaction(async (client) => {
+//     // Obtener información del evento
+//     const eventResult = await client.query(
+//       "SELECT price, capacity, tickets_sold FROM events WHERE id = $1 AND is_active = true",
+//       [eventId],
+//     )
 
-    if (eventResult.rows.length === 0) {
-      throw new Error("Evento no encontrado")
-    }
+//     if (eventResult.rows.length === 0) {
+//       throw new Error("Evento no encontrado")
+//     }
 
-    const event = eventResult.rows[0]
-    const availableTickets = event.capacity - event.tickets_sold
+//     const event = eventResult.rows[0]
+//     const availableTickets = event.capacity - event.tickets_sold
 
-    if (availableTickets < quantity) {
-      throw new Error("No hay suficientes entradas disponibles")
-    }
+//     if (availableTickets < quantity) {
+//       throw new Error("No hay suficientes entradas disponibles")
+//     }
 
-    // Calcular precio según tipo de entrada
-    let ticketPrice = event.price
-    if (ticketType === "vip") ticketPrice *= 1.5
-    if (ticketType === "premium") ticketPrice *= 2
+//     // Calcular precio según tipo de entrada
+//     let ticketPrice = event.price
+//     if (ticketType === "vip") ticketPrice *= 1.5
+//     if (ticketType === "premium") ticketPrice *= 2
 
-    const totalAmount = ticketPrice * quantity
+//     const totalAmount = ticketPrice * quantity
 
-    // Crear reserva
-    const reservationResult = await client.query(
-      `INSERT INTO event_reservations (user_id, event_id, ticket_type, quantity, total_amount, special_requests)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, reservation_code, created_at`,
-      [userId, eventId, ticketType, quantity, totalAmount, specialRequests],
-    )
+//     // Crear reserva
+//     const reservationResult = await client.query(
+//       `INSERT INTO event_reservations (user_id, event_id, ticket_type, quantity, total_amount, special_requests)
+//        VALUES ($1, $2, $3, $4, $5, $6)
+//        RETURNING id, reservation_code, created_at`,
+//       [userId, eventId, ticketType, quantity, totalAmount, specialRequests],
+//     )
 
-    // Actualizar tickets vendidos
-    await client.query("UPDATE events SET tickets_sold = tickets_sold + $1 WHERE id = $2", [quantity, eventId])
+//     // Actualizar tickets vendidos
+//     await client.query("UPDATE events SET tickets_sold = tickets_sold + $1 WHERE id = $2", [quantity, eventId])
 
-    const reservation = reservationResult.rows[0]
+//     const reservation = reservationResult.rows[0]
 
-    return {
-      id: reservation.id,
-      userId,
-      eventId,
-      ticketType,
-      quantity,
-      totalAmount,
-      status: "pending",
-      paymentStatus: "pending",
-      reservationCode: reservation.reservation_code,
-      specialRequests,
-      createdAt: reservation.created_at,
-    }
-  })
-}
+//     return {
+//       id: reservation.id,
+//       userId,
+//       eventId,
+//       ticketType,
+//       quantity,
+//       totalAmount,
+//       status: "pending",
+//       paymentStatus: "pending",
+//       reservationCode: reservation.reservation_code,
+//       specialRequests,
+//       createdAt: reservation.created_at,
+//     }
+//   })
+// }
 
 // Crear reserva de mesa
 export async function createTableReservation(data: CreateTableReservationData): Promise<TableReservation> {
@@ -213,28 +213,28 @@ export async function confirmReservation(reservationId: string, type: "event" | 
 }
 
 // Cancelar reserva
-export async function cancelReservation(reservationId: string, type: "event" | "table"): Promise<void> {
-  if (type === "event") {
-    await transaction(async (client) => {
-      // Obtener información de la reserva
-      const reservationResult = await client.query("SELECT event_id, quantity FROM event_reservations WHERE id = $1", [
-        reservationId,
-      ])
+// export async function cancelReservation(reservationId: string, type: "event" | "table"): Promise<void> {
+//   if (type === "event") {
+//     await transaction(async (client) => {
+//       // Obtener información de la reserva
+//       const reservationResult = await client.query("SELECT event_id, quantity FROM event_reservations WHERE id = $1", [
+//         reservationId,
+//       ])
 
-      if (reservationResult.rows.length > 0) {
-        const { event_id, quantity } = reservationResult.rows[0]
+//       if (reservationResult.rows.length > 0) {
+//         const { event_id, quantity } = reservationResult.rows[0]
 
-        // Devolver tickets al evento
-        await client.query("UPDATE events SET tickets_sold = tickets_sold - $1 WHERE id = $2", [quantity, event_id])
-      }
+//         // Devolver tickets al evento
+//         await client.query("UPDATE events SET tickets_sold = tickets_sold - $1 WHERE id = $2", [quantity, event_id])
+//       }
 
-      // Cancelar reserva
-      await client.query("UPDATE event_reservations SET status = 'cancelled' WHERE id = $1", [reservationId])
-    })
-  } else {
-    await query("UPDATE table_reservations SET status = 'cancelled' WHERE id = $1", [reservationId])
-  }
-}
+//       // Cancelar reserva
+//       await client.query("UPDATE event_reservations SET status = 'cancelled' WHERE id = $1", [reservationId])
+//     })
+//   } else {
+//     await query("UPDATE table_reservations SET status = 'cancelled' WHERE id = $1", [reservationId])
+//   }
+// }
 
 // Funciones auxiliares
 function mapDbEventReservation(row: any): EventReservation {

@@ -239,8 +239,8 @@ const { eventId, eventTitle, eventPrice } = Astro.props;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('reservation-form');
-        const ticketTypeSelect = form?.querySelector('select[name="ticketType"]');
-        const quantitySelect = form?.querySelector('select[name="quantity"]');
+        const ticketTypeSelect = form?.querySelector('select[name="ticketType"]') as HTMLSelectElement | null;
+        const quantitySelect = form?.querySelector('select[name="quantity"]') as HTMLSelectElement | null;
         const subtotalElement = document.getElementById('subtotal');
         const taxesElement = document.getElementById('taxes');
         const totalElement = document.getElementById('total');
@@ -256,7 +256,7 @@ const { eventId, eventTitle, eventPrice } = Astro.props;
                 return;
             }
 
-            const selectedOption = ticketTypeSelect?.querySelector(`option[value="${ticketType}"]`);
+            const selectedOption = ticketTypeSelect?.querySelector(`option[value="${ticketType}"]`) as HTMLOptionElement | null;
             const price = parseFloat(selectedOption?.dataset.price || '0');
             
             const subtotal = price * quantity;
@@ -275,18 +275,18 @@ const { eventId, eventTitle, eventPrice } = Astro.props;
             e.preventDefault();
             
             // Simulate form submission
-            const submitButton = form.querySelector('.btn-reserve');
+            const submitButton = form.querySelector('.btn-reserve') as HTMLButtonElement | null;
             const originalText = submitButton?.querySelector('.btn-text')?.textContent;
             
             if (submitButton && originalText) {
                 submitButton.disabled = true;
-                submitButton.querySelector('.btn-text').textContent = 'Procesando...';
+                submitButton.querySelector('.btn-text')!.textContent = 'Procesando...';
                 
                 setTimeout(() => {
                     alert('¡Reserva realizada con éxito! Recibirás un email de confirmación.');
                     submitButton.disabled = false;
-                    submitButton.querySelector('.btn-text').textContent = originalText;
-                    form.reset();
+                    submitButton.querySelector('.btn-text')!.textContent = originalText;
+                    (form as HTMLFormElement).reset();
                     updatePricing();
                 }, 2000);
             }

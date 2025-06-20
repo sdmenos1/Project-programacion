@@ -46,24 +46,27 @@ const { drinkId, drinkName, price } = Astro.props;
 </style>
 
 <script>
+    // Extiende la interfaz Window para declarar handleDrinkOrder
+    // @ts-ignore
     window.handleDrinkOrder = function(button) {
-        window.requireAuth(() => {
-            const drinkId = button.dataset.drinkId;
-            const drinkName = button.dataset.drinkName;
-            const price = button.dataset.price;
-            
-            // Aquí iría la lógica para agregar al carrito
-            console.log('Agregando al carrito:', { drinkId, drinkName, price });
-            
-            // Mostrar confirmación
-            alert(`${drinkName} agregado al carrito!`);
-            
-            // Aquí podrías hacer la petición al API
-            // window.authenticatedFetch('/api/drinks/orders', {
-            //     method: 'POST',
-            //     body: JSON.stringify({ drinkId, quantity: 1 })
-            // });
-            
-        }, 'Debes iniciar sesión para ordenar bebidas');
+        try {
+            window.requireAuth(() => {
+                const drinkId = button.dataset.drinkId;
+                const drinkName = button.dataset.drinkName;
+                const price = button.dataset.price;
+
+                console.log('Agregando al carrito:', { drinkId, drinkName, price });
+
+                alert(`${drinkName} agregado al carrito!`);
+
+                // Ejemplo comentado de petición:
+                // window.authenticatedFetch('/api/drinks/orders', {
+                //     method: 'POST',
+                //     body: JSON.stringify({ drinkId, quantity: 1 })
+                // });
+            });
+        } catch (error) {
+            alert('Debes iniciar sesión para ordenar bebidas');
+        }
     };
 </script>

@@ -108,7 +108,7 @@
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                const filter = btn.dataset.filter;
+                const filter = (btn as HTMLElement).dataset.filter;
                 
                 // Update active button
                 filterButtons.forEach(b => b.classList.remove('active'));
@@ -116,11 +116,12 @@
                 
                 // Filter items
                 galleryItems.forEach(item => {
-                    if (filter === 'all' || item.dataset.category === filter) {
-                        item.style.display = 'block';
-                        item.style.animation = 'fadeInUp 0.5s ease forwards';
+                    const el = item as HTMLElement;
+                    if (filter === 'all' || el.dataset.category === filter) {
+                        el.style.display = 'block';
+                        el.style.animation = 'fadeInUp 0.5s ease forwards';
                     } else {
-                        item.style.display = 'none';
+                        el.style.display = 'none';
                     }
                 });
             });
@@ -131,8 +132,9 @@
             filterButtons[0].classList.add('active');
             
             galleryItems.forEach(item => {
-                item.style.display = 'block';
-                item.style.animation = 'fadeInUp 0.5s ease forwards';
+                const el = item as HTMLElement;
+                el.style.display = 'block';
+                el.style.animation = 'fadeInUp 0.5s ease forwards';
             });
         });
     });

@@ -592,7 +592,7 @@ document.addEventListener('click', function(e) {
     const userMenu = document.getElementById('user-menu');
     const dropdown = document.getElementById('user-dropdown');
     
-    if (userMenu && dropdown && !userMenu.contains(e.target)) {
+    if (userMenu && dropdown && !userMenu.contains(e.target as Node)) {
         dropdown.classList.add('hidden');
     }
 });

@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auth Store simple (sin importaciones complejas)
     const authAPI = {
-        async login(email, password) {
+        async login(email: string, password: string) {
             try {
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
-        async register(userData) {
+        async register(userData: any) {
             try {
                 const response = await fetch('/api/auth/register', {
                     method: 'POST',
@@ -428,8 +428,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideModal() {
         modal?.classList.remove('active');
         document.body.style.overflow = '';
-        loginFormElement?.reset();
-        registerFormElement?.reset();
+        (loginFormElement as HTMLFormElement | null)?.reset();
+        (registerFormElement as HTMLFormElement | null)?.reset();
         hideErrors();
     }
 
@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm?.classList.remove('hidden');
     }
 
-    function showError(formType, message) {
+    function showError(formType: string, message: string) {
         const errorElement = document.getElementById(`${formType}-error`);
         if (errorElement) {
             errorElement.textContent = message;
@@ -458,18 +458,18 @@ document.addEventListener('DOMContentLoaded', () => {
         registerError?.classList.add('hidden');
     }
 
-    function setLoading(formType, loading) {
+    function setLoading(formType: string, loading: boolean) {
         const submitBtn = document.getElementById(`${formType}-submit`);
         const btnText = submitBtn?.querySelector('.btn-text');
         const btnLoader = submitBtn?.querySelector('.btn-loader');
 
         if (submitBtn && btnText && btnLoader) {
-            submitBtn.disabled = loading;
+            (submitBtn as HTMLButtonElement).disabled = loading;
             if (loading) {
-                btnText.style.opacity = '0';
+                (btnText as HTMLElement).style.opacity = '0';
                 btnLoader.classList.remove('hidden');
             } else {
-                btnText.style.opacity = '1';
+                (btnText as HTMLElement).style.opacity = '1';
                 btnLoader.classList.add('hidden');
             }
         }
@@ -494,9 +494,9 @@ document.addEventListener('DOMContentLoaded', () => {
         hideErrors();
         setLoading('login', true);
 
-        const formData = new FormData(e.target);
-        const email = formData.get('email');
-        const password = formData.get('password');
+        const formData = new FormData(e.target as HTMLFormElement);
+        const email = String(formData.get('email') ?? '');
+        const password = String(formData.get('password') ?? '');
 
         const result = await authAPI.login(email, password);
 
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideErrors();
         setLoading('register', true);
 
-        const formData = new FormData(e.target);
+        const formData = new FormData(e.target as HTMLFormElement);
         const userData = {
             username: formData.get('username'),
             email: formData.get('email'),

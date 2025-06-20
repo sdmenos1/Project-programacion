@@ -498,7 +498,7 @@ const events = eventsData;
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const loadMoreBtn = document.getElementById('load-more');
+        const loadMoreBtn = document.getElementById('load-more') as HTMLButtonElement | null;
         const newsletterForm = document.getElementById('newsletter-form');
 
         // Load more functionality (simulated)
@@ -517,17 +517,19 @@ const events = eventsData;
             e.preventDefault();
             
             const submitBtn = newsletterForm.querySelector('.newsletter-btn');
-            const originalContent = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<span>Suscribiendo...</span>';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('¡Suscripción exitosa! Recibirás noticias de nuestros eventos.');
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-                newsletterForm.reset();
-            }, 2000);
+            if (submitBtn) {
+                const originalContent = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<span>Suscribiendo...</span>';
+                (submitBtn as HTMLButtonElement).disabled = true;
+                
+                setTimeout(() => {
+                    alert('¡Suscripción exitosa! Recibirás noticias de nuestros eventos.');
+                    submitBtn.innerHTML = originalContent;
+                    (submitBtn as HTMLButtonElement).disabled = false;
+                    (newsletterForm as HTMLFormElement).reset();
+                }, 2000);
+            }
         });
     });
 </script>

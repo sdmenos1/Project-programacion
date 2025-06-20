@@ -612,12 +612,12 @@ import Footer from '../components/Footer.astro';
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('reservation-form');
+        const form = document.getElementById('reservation-form') as HTMLFormElement;
         const steps = document.querySelectorAll('.form-step');
         const stepIndicators = document.querySelectorAll('.step-indicator');
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const btnSubmit = document.getElementById('btn-submit');
+        const btnPrev = document.getElementById('btn-prev') as HTMLButtonElement | null;
+        const btnNext = document.getElementById('btn-next') as HTMLButtonElement | null;
+        const btnSubmit = document.getElementById('btn-submit') as HTMLButtonElement | null;
         
         let currentStep = 1;
         const totalSteps = steps.length;
@@ -632,43 +632,54 @@ import Footer from '../components/Footer.astro';
                 indicator.classList.toggle('active', index + 1 <= currentStep);
             });
 
-            btnPrev.disabled = currentStep === 1;
-            btnPrev.style.display = currentStep === 1 ? 'none' : 'block';
+            if (btnPrev) {
+                btnPrev.disabled = currentStep === 1;
+                btnPrev.style.display = currentStep === 1 ? 'none' : 'block';
+            }
             
             if (currentStep === totalSteps) {
-                btnNext.style.display = 'none';
-                btnSubmit.style.display = 'block';
+                if (btnNext) btnNext.style.display = 'none';
+                if (btnSubmit) btnSubmit.style.display = 'block';
             } else {
-                btnNext.style.display = 'block';
-                btnSubmit.style.display = 'none';
+                if (btnNext) btnNext.style.display = 'block';
+                if (btnSubmit) btnSubmit.style.display = 'none';
             }
 
             updateSummary();
         }
 
         // Navigation handlers
-        btnNext.addEventListener('click', () => {
-            if (validateCurrentStep() && currentStep < totalSteps) {
-                currentStep++;
-                updateStep();
-            }
-        });
+        if (btnNext) {
+            btnNext.addEventListener('click', () => {
+                if (validateCurrentStep() && currentStep < totalSteps) {
+                    currentStep++;
+                    updateStep();
+                }
+            });
+        }
 
-        btnPrev.addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateStep();
-            }
-        });
+        if (btnPrev) {
+            btnPrev.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateStep();
+                }
+            });
+        }
 
         // Form validation
         function validateCurrentStep() {
             const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+            if (!currentStepElement) {
+                alert('Error interno: No se encontró el paso actual del formulario.');
+                return false;
+            }
             const requiredFields = currentStepElement.querySelectorAll('[required]');
             
             for (let field of requiredFields) {
-                if (!field.value.trim()) {
-                    field.focus();
+                const input = field as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+                if (!input.value.trim()) {
+                    input.focus();
                     alert('Por favor completa todos los campos requeridos');
                     return false;
                 }
@@ -704,9 +715,12 @@ import Footer from '../components/Footer.astro';
             if (guests) summary += `<p><strong>Personas:</strong> ${guests}</p>`;
             if (tableType) {
                 const tableSelect = document.querySelector('select[name="tableType"]');
-                const selectedOption = tableSelect.querySelector(`option[value="${tableType}"]`);
+                let selectedOption = null;
+                if (tableSelect) {
+                    selectedOption = tableSelect.querySelector(`option[value="${tableType}"]`);
+                }
                 if (selectedOption) {
-                    tablePrice = parseInt(selectedOption.dataset.price) || 0;
+                    tablePrice = parseInt((selectedOption as HTMLOptionElement).dataset.price || '0') || 0;
                     summary += `<p><strong>Mesa:</strong> ${selectedOption.textContent}</p>`;
                 }
             }
@@ -719,8 +733,12 @@ import Footer from '../components/Footer.astro';
                     const serviceCheckbox = document.querySelector(`input[value="${service}"]`);
                     if (serviceCheckbox) {
                         const serviceCard = serviceCheckbox.nextElementSibling;
-                        const serviceName = serviceCard.querySelector('.service-name').textContent;
-                        const servicePrice = parseInt(serviceCheckbox.dataset.price) || 0;
+                        let serviceName = '';
+                        const serviceNameElement = serviceCard && serviceCard.querySelector('.service-name');
+                        if (serviceNameElement) {
+                            serviceName = serviceNameElement.textContent || '';
+                        }
+                        const servicePrice = parseInt((serviceCheckbox as HTMLInputElement).dataset.price || '0') || 0;
                         servicesPrice += servicePrice;
                         summary += `<li>${serviceName}</li>`;
                     }
@@ -729,22 +747,30 @@ import Footer from '../components/Footer.astro';
             }
 
             if (summary) {
-                summaryDetails.innerHTML = summary;
+                if (summaryDetails) {
+                    summaryDetails.innerHTML = summary;
+                }
                 
                 // Update pricing
                 const subtotal = tablePrice + servicesPrice;
                 const tax = subtotal * 0.1;
                 const total = subtotal + tax;
 
-                document.getElementById('table-price').textContent = `$${tablePrice}`;
-                document.getElementById('services-price').textContent = `$${servicesPrice}`;
-                document.getElementById('tax-price').textContent = `$${tax.toFixed(2)}`;
-                document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+                const tablePriceElem = document.getElementById('table-price');
+                if (tablePriceElem) tablePriceElem.textContent = `$${tablePrice}`;
+                const servicesPriceElem = document.getElementById('services-price');
+                if (servicesPriceElem) servicesPriceElem.textContent = `$${servicesPrice}`;
+                const taxPriceElem = document.getElementById('tax-price');
+                if (taxPriceElem) taxPriceElem.textContent = `$${tax.toFixed(2)}`;
+                const totalPriceElem = document.getElementById('total-price');
+                if (totalPriceElem) totalPriceElem.textContent = `$${total.toFixed(2)}`;
                 
-                priceBreakdown.style.display = 'block';
+                if (priceBreakdown) priceBreakdown.style.display = 'block';
             } else {
-                summaryDetails.innerHTML = '<p class="summary-placeholder">Completa el formulario para ver el resumen</p>';
-                priceBreakdown.style.display = 'none';
+                if (summaryDetails) {
+                    summaryDetails.innerHTML = '<p class="summary-placeholder">Completa el formulario para ver el resumen</p>';
+                }
+                if (priceBreakdown) priceBreakdown.style.display = 'none';
             }
         }
 
@@ -754,13 +780,17 @@ import Footer from '../components/Footer.astro';
             
             if (!validateCurrentStep()) return;
             
-            btnSubmit.disabled = true;
-            btnSubmit.textContent = 'Procesando...';
+            if (btnSubmit) {
+                btnSubmit.disabled = true;
+                btnSubmit.textContent = 'Procesando...';
+            }
             
             setTimeout(() => {
                 alert('¡Reserva confirmada! Recibirás un email con los detalles.');
-                btnSubmit.disabled = false;
-                btnSubmit.textContent = 'Confirmar Reserva';
+                if (btnSubmit) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = 'Confirmar Reserva';
+                }
                 form.reset();
                 currentStep = 1;
                 updateStep();

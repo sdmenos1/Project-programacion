@@ -149,10 +149,10 @@ const { categories } = Astro.props;
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const categoryFilter = document.getElementById('category-filter');
-        const priceFilter = document.getElementById('drink-price-filter');
-        const alcoholFilter = document.getElementById('alcohol-filter');
-        const popularFilter = document.getElementById('popular-filter');
+        const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement | null;
+        const priceFilter = document.getElementById('drink-price-filter') as HTMLSelectElement | null;
+        const alcoholFilter = document.getElementById('alcohol-filter') as HTMLSelectElement | null;
+        const popularFilter = document.getElementById('popular-filter') as HTMLSelectElement | null;
         const clearFilters = document.getElementById('clear-drink-filters');
         const drinksGrid = document.getElementById('drinks-grid');
 
@@ -167,7 +167,7 @@ const { categories } = Astro.props;
                 let showDrink = true;
 
                 // Filter by category
-                if (selectedCategory && drink.dataset.category !== selectedCategory) {
+                if (selectedCategory && (drink as HTMLElement).dataset.category !== selectedCategory) {
                     showDrink = false;
                 }
 
@@ -175,9 +175,9 @@ const { categories } = Astro.props;
 
                 // Show/hide drink
                 if (showDrink) {
-                    drink.style.display = 'block';
+                    (drink as HTMLElement).style.display = 'block';
                 } else {
-                    drink.style.display = 'none';
+                    (drink as HTMLElement).style.display = 'none';
                 }
             });
         }
